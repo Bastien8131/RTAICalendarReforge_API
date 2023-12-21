@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="net.sf.biweekly" type="repository">
+    <properties maven-id="net.sf.biweekly:biweekly:0.6.7" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/sf/biweekly/biweekly/0.6.7/biweekly-0.6.7.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/mangstadt/vinnie/2.0.2/vinnie-2.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.14.2/jackson-core-2.14.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
