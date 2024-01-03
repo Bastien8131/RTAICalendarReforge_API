@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
-import java.util.Map;
-
 @SpringBootApplication
 @RestController
 public class RtaiCalendarReforgeApiApplication {
@@ -23,8 +20,8 @@ public class RtaiCalendarReforgeApiApplication {
 	}
 
 	@RequestMapping(value = "/api/message", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Map<String, String> index() {
+	public String index() {
 		System.out.println("Received request at: /api/message");
-		return Collections.singletonMap("message", IcsDownload.getICalJson());
+		return IcsDownload.getICalJson();
 	}
 }

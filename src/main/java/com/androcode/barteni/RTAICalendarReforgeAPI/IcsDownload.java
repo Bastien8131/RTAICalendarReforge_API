@@ -14,6 +14,8 @@ public class IcsDownload {
     }
 
     public static String getICalJson() {
+
+        //URL Agenda : https://cours23-24.ut-capitole.fr/calendar/export_execute.php?userid=140260&authtoken=4f4b49b29c452d9ab6cff30a6ddf80f363df356b&preset_what=all&preset_time=custom
         String fileURL = "https://ade-production.ut-capitole.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?data=8241fc38732002145f8811789c9c6731bd72d825015315fe66c60d53cab758dbf377b612dec2c5fba5147d40716acb136c03e67b339315cf";
         String defaultPath = "C:\\Users\\Bastien\\Downloads\\";
         String fileName = "ICal.json";
