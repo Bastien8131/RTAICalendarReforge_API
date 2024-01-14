@@ -14,14 +14,25 @@ public class RtaiCalendarReforgeApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RtaiCalendarReforgeApiApplication.class, args);
 	}
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
+
+	@RequestMapping(value = "/API-RTAICalReforge/events", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String allEvents() {
+		System.out.println("Received request at: /API-RTAICalReforge/events");
+		return IcsManager.getICalData().toString();
 	}
 
-	@RequestMapping(value = "/api/message", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String index() {
-		System.out.println("Received request at: /api/message");
-		return IcsDownload.getICalJson();
+	@RequestMapping(value = "/API-RTAICalReforge/events/days", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String eventsGroupeByDays() {
+		System.out.println("Received request at: /API-RTAICalReforge/events/days");
+		return IcsManager.getVEventsByDays().toString();
 	}
+
+	@RequestMapping(value = "/API-RTAICalReforge/events/months", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String eventsGroupeByMonths() {
+		System.out.println("Received request at: /API-RTAICalReforge/events/months");
+		return IcsManager.getVEventsByMonths().toString();
+	}
+
+
+
 }
