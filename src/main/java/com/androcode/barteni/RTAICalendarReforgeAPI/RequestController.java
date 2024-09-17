@@ -3,16 +3,14 @@ package com.androcode.barteni.RTAICalendarReforgeAPI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class RtaiCalendarReforgeApiApplication {
+public class RequestController {
 	public static void main(String[] args) {
-		SpringApplication.run(RtaiCalendarReforgeApiApplication.class, args);
+		SpringApplication.run(RequestController.class, args);
 	}
 
 	@RequestMapping(value = "/API-RTAICalReforge/events", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +31,12 @@ public class RtaiCalendarReforgeApiApplication {
 		return IcsManager.getVEventsByMonths().toString();
 	}
 
+
+	@RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String test() {
+		System.out.println("Received request at: /test");
+		return "Hello World!";
+	}
 
 
 }

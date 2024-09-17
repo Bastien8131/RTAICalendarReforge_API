@@ -1,23 +1,35 @@
 package com.androcode.barteni.RTAICalendarReforgeAPI;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class IcsManager {
 
     private static String downloadData() {
 
         //URL Agenda : https://cours23-24.ut-capitole.fr/calendar/export_execute.php?userid=140260&authtoken=4f4b49b29c452d9ab6cff30a6ddf80f363df356b&preset_what=all&preset_time=custom
-        String fileURL = "https://ade-production.ut-capitole.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?data=8241fc38732002145f8811789c9c6731bd72d825015315fe66c60d53cab758dbf377b612dec2c5fba5147d40716acb136c03e67b339315cf";
+        //String fileURL = "https://ade-production.ut-capitole.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?data=8241fc3873200214f38d8871d9092e5dbd72d825015315fe66c60d53cab758dbf377b612dec2c5fba5147d40716acb136c03e67b339315cf";
+        // String fileURL = "https://ade-production.ut-capitole.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?data=8241fc38732002145f8811789c9c6731bd72d825015315fe66c60d53cab758dbf377b612dec2c5fba5147d40716acb136c03e67b339315cf";
+        String fileURL = "https://ade-production.ut-capitole.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?data=8241fc3873200214ce5b66ddca2dfd29bd72d825015315fe7b231a07b6a54172f377b612dec2c5fba5147d40716acb136c03e67b339315cf";
         String defaultPath = "C:\\Users\\Bastien\\Downloads\\";
         String fileName = "ICal.json";
 
@@ -78,16 +90,23 @@ public class IcsManager {
             }
 
             // For other lines, convert the iCalendar property to JSON format
-            if(line.contains("ALTERNANCE")){
-                estAlternance = true;
-            }
+            // if(line.contains("ALTERNANCE")){
+            //     estAlternance = true;
+            // }
             if(line.contains("DESCRIPTION")){
                 if(estAlternance){
                     line = "DESCRIPTION:";
                     estAlternance = false;
                 }else{
                     parts = line.split("\\\\n");
-                    line = parts[0] + parts[4];
+                    System.out.println("line : " + line);
+                    System.out.println("parts.length : " + parts.length);
+                    line = switch (parts.length) {
+                        case 4 -> parts[0] + parts[2];
+                        case 5 -> parts[0] + parts[2] + "@" + parts[3];
+                        case 6 -> parts[0] + parts[2] + "@" + parts[4];
+                        default -> "null";
+                    };
                 }
             }
 
